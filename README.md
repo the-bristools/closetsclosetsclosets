@@ -91,10 +91,10 @@ Each individual item will belong to a subcategory in one of the main categories.
 
 ### Stretch Goals:
 
-| Authentication | Documentation |
-| ------------- |:-------------:| -----:|
-| Facebook | [Link Here!](https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow) |
-| Google | [Link Here!](https://developers.google.com/identity/) |
+Authentication | Documentation
+------------- |:-------------:| -----
+Facebook | [Link Here!](https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow)
+Google | [Link Here!](https://developers.google.com/identity/)
 
 * Closet
 	* Multiple Closets
