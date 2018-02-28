@@ -1,24 +1,23 @@
 <div class="container">
 	<div class="row">
 		<form class="col s12">
+			{{#each item}}
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="userId" type="text">
-					<label for="userId">User Id</label>
+					<input id="userId" type="text" data="{{userId}}" disabled>
+					<label for="userId">UserId: {{userId}}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="itemName" type="text">
-					<label for="username">Item Name</label>
+					<input id="itemName" type="text" data="{{name}}">
+					<label for="username">{{name}}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
-					<select id="categoryId">
-						{{#each categories}}
-							<option value="{{id}}">{{name}}</option>
-						{{/each}}
+					<select id="categoryId" disabled>
+						<option value="{{categoryId}}">Category Name {{category key=name}}</option>
 					</select>
 					<label>Select A Category!</label>
 				</div>
@@ -45,6 +44,7 @@
 					<label for="tags">Tags</label>
 				</div>
 			</div>
+			{{/each}}
 		<button class="btn red" id="newItem">Create New Item</button>
 		</form>
 	</div>
