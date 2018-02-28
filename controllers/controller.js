@@ -94,12 +94,23 @@ router.get("/api/category/search", function(req, res){
     if (req.query.id) {
     	query.id = req.query.id;
     }
-    category.findAll({
-    	where: query
-    }).then(function(results) {
+    category.findAll({where: query})
+    .then(function(results) {
     	console.log(results);
     	res.json(results);
     });
+})
+
+router.get("/update", function(req, res){
+	var query = req.query.id;
+	item.findOne({where:query})
+	.then(function(result){
+		hbsObject = {
+			item:result
+		}
+		console.log(result);
+		res.render("update", hbsObject)
+	})
 })
 
 router.put("/api/item/update", function(req, res){

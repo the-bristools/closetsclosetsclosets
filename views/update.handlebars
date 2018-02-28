@@ -1,0 +1,77 @@
+<div class="container">
+	<div class="row">
+		<form class="col s12">
+			{{#each item}}
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="userId" type="text" data="{{userId}}" disabled>
+					<label for="userId">UserId: {{userId}}</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="itemName" type="text" data="{{name}}">
+					<label for="username">{{name}}</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<select id="categoryId" disabled>
+						<option value="{{categoryId}}">Category Name {{category key=name}}</option>
+					</select>
+					<label>Select A Category!</label>
+				</div>
+				<div class="input-field col s6">
+					<input id="subcategory" type="text">
+					<label for="subcategory">Subcategory (optional)</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea id="description" class="materialize-textarea"></textarea>
+					<label for="description">Description</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="img_url" type="text">
+					<label for="img_url">Image URL</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="tags" type="text">
+					<label for="tags">Tags</label>
+				</div>
+			</div>
+			{{/each}}
+		<button class="btn red" id="newItem">Create New Item</button>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+$('#newItem').on('click', function(){
+	event.preventDefault();
+	var data = {};
+	data.userId = $('#userId').val().trim();
+	data.name = $('#itemName').val().trim();
+	data.categoryId = $('#categoryId').val();
+	data.subcategory = $('#subcategory').val().trim();
+	data.description = $('#description').val().trim();
+	data.img_url = $('#img_url').val().trim();
+	data.tags = $('#tags').val().trim();
+	console.log(data);
+
+	$.ajax({
+		url: "/api/item/new",
+		type: 'POST',
+		data: data
+	}, data).then((response)=>{
+		console.log(response);
+	})
+})
+
+	// $('#description').val('Description Text');
+	// $('#description').trigger('autoresize');
+</script>
