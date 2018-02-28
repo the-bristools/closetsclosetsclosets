@@ -19,6 +19,15 @@ robability.belongsTo(user);
 
 router.get("/", function(req, res){
 
+	item.findAll({where:{userId:1},include:[user,category]})
+	.then(data =>{
+		var hbsObject = {
+			items: data
+		};
+		console.log('Root Directory Requested');
+		res.render("index", hbsObject);
+	})
+
  //  //   burger.findAll({}).then(data =>{
  //  //     var hbsObject = {
 	// 	// 	burgers: data
@@ -39,6 +48,15 @@ router.get("/", function(req, res){
  //    })
 	// console.log('Root Directory Request');
 	// // res.render("index");
+})
+
+router.get("/item", function(req, res){
+	category.findAll({}).then(data =>{
+		var hbsObject = {
+			categories: data
+		};
+		res.render("item", hbsObject);
+	})
 })
 
 router.get("/api/item/search", function(req, res){
@@ -76,7 +94,7 @@ router.get("/api/category/search", function(req, res){
     if (req.query.id) {
     	query.id = req.query.id;
     }
-    user.findAll({
+    category.findAll({
     	where: query
     }).then(function(results) {
     	console.log(results);
@@ -85,24 +103,23 @@ router.get("/api/category/search", function(req, res){
 })
 
 router.put("/api/item/update", function(req, res){
-	var id = req.body.id;
-	var update = {};
-	if(req.body.img_url){
-		update.img_url = req.body.img_url;
-	}
-	if(req.body.description){
-		update.description = req.body.description;
-	}
-	if(req.body.categoryId){
-		update.categoryId = req.body.categoryId;
-	}
-	if(req.body.subcategory){
-		update.subcategory = req.body.subcategory;
-	}
-	if(req.body.tags){
-		update.tags = req.body.tags;
-	}
-	item.update(update,
+	// var update = {};
+	// if(req.body.img_url){
+	// 	update.img_url = req.body.img_url;
+	// }
+	// if(req.body.description){
+	// 	update.description = req.body.description;
+	// }
+	// if(req.body.categoryId){
+	// 	update.categoryId = req.body.categoryId;
+	// }
+	// if(req.body.subcategory){
+	// 	update.subcategory = req.body.subcategory;
+	// }
+	// if(req.body.tags){
+	// 	update.tags = req.body.tags;
+	// }
+	item.update(req.body,
 	{
 		where: { id: req.body.id }
 	})
@@ -111,6 +128,15 @@ router.put("/api/item/update", function(req, res){
 	}).catch((error)=>{
 		console.log(error);
 		return res.json(error);
+	})
+})
+
+router.post("/api/item/new", function(req, res){
+	item.create(req.body)
+	.then(result =>{
+		console.log('posted new item');
+		console.log(result);
+		return res.json('posted new item');
 	})
 })
 
