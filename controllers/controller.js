@@ -1,13 +1,16 @@
 var express = require("express");
-var passport = require ("passport");
+var passport = require("passport");
+// var passport = require ("../config/passport.js");
 
 var router = express.Router();
 
 var db = require("../models");
+
 var user = db.user;
 var item = db.item;
 var category = db.category;
 var robability = db.robability;
+
 
 user.hasMany(item);
 item.belongsTo(user);
