@@ -22,7 +22,8 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		},
 		auth_method: DataTypes.STRING,
-		auth_id: DataTypes.INTEGER
+		auth_id: DataTypes.STRING,
+		email: DataTypes.STRING
 	}
 	// ,{
 	// 	timestamps: false

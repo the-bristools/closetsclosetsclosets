@@ -14,4 +14,7 @@ robability
 * /post - create a new vote
 * /put - update a vote
 
+/error
+fb error
+
 update user.hasMany with delete:cascade
