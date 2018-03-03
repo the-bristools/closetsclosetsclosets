@@ -26,16 +26,16 @@ INSERT INTO items (name,img_url,userId,description,categoryId,subcategory,tags) 
 INSERT INTO users (name,img_url,description,auth_method,auth_id) VALUES ("Mr. Cat","https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif","I like cats and cats in closets cuz I'm a cat!","closets.com",444444);
 
 INSERT INTO items (name,img_url,userId,description,categoryId,subcategory,tags) VALUES
-("White Cat","https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif",4,"This is a thing that I got.",2,"Bodily fluids","poop,solid,chunky"),
-("Black Cat Nail Filing","https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Shaq Cat","https://media.giphy.com/media/nNxT5qXR02FOM/giphy.gif",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Thingymajigger","",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Thingymajigger","",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Thingymajigger","",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Thingymajigger","",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Thingymajigger","",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Thingymajigger","",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky"),
-("Thingymajigger","",4,"This is a thing that I got.",3,"Bodily fluids","poop,solid,chunky");
+("Cat Toe Stretch","https://media.giphy.com/media/11s7Ke7jcNxCHS/giphy.gif",4,"This is a thing that I got.",2,"Cat","cute,cat,kitten"),
+("Black Cat Nail Filing","https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Shaq Cat","https://media.giphy.com/media/nNxT5qXR02FOM/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Shoe Cat","https://media.giphy.com/media/8vQSQ3cNXuDGo/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Jedi Cat","https://media.giphy.com/media/xBAreNGk5DapO/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Shy Cat","https://media.giphy.com/media/yFQ0ywscgobJK/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Cat Chicks","https://media.giphy.com/media/12PA1eI8FBqEBa/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Birthday Cat","https://media.giphy.com/media/SRO0ZwmImic0/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Laundry Cat","https://media.giphy.com/media/p4xp4BjHIdane/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Uwaaaaa!","https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten");
 
 INSERT INTO robabilities (userId,voter_id,score) VALUES (1,2,3);
 INSERT INTO robabilities (userId,voter_id,score) VALUES (2,1,5);
