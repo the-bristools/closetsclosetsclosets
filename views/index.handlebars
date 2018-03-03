@@ -9,7 +9,7 @@
 					<h3>Check out some closets!!</h3>
 					<div class="row">
 						<button data-target="modal2" class="smol-margin btn blue modal-trigger animated infinite pulse">Look at a closet!</button>
-						<a href="/item"><button class="smol-margin btn red modal-trigger">Add a new item!</button></a>
+						<a href="#"><button data-target="modal1" class="smol-margin btn red modal-trigger">Add a new item!</button></a>
 						<button class="smol-margin btn red modal-trigger">New User! (not implemented)</button>
 						{{!-- <button id="check-date" class="smol-margin btn red">Date</button> --}}
 					</div>
@@ -43,7 +43,7 @@
 		</ul>
 	</div>
 
-{{!-- 	<div id="modal1" class="modal modal-custom">
+	<div id="modal1" class="modal modal-custom">
 		<div class="modal-content modal-content-custom">
 			<h4 class="animated slideInUp center-align">Add a burger</h4>
 			<form>
@@ -63,6 +63,7 @@
 						<label for="name">Name of Burger</label>
 					</div>
 				</div>
+			</div>
 				<div class="row">
 					<div class="col s0 m3 l4"></div>
 					{{!-- <div class="col s12 center-align"> --}}
@@ -72,7 +73,7 @@
 				</div>
 			</form>		
 		</div>
-	</div> --}}
+	</div>
 
 	<div id="modal2" class="modal bottom-sheet yellow">
 		<div class="modal-content">	
@@ -88,13 +89,12 @@
 					<button class="devour btn green" name="{{name}}" id="{{id}}">Devour</button>
 					{{!-- <button class="delete btn red rounded" burgerId="{{id}}">Delete</button> --}}
 				</div>
-				{{!-- {{/unless}} --}}
 			{{/each}}
 			</div>
 		</div>
 	</div>
 
-	<div id="modal4" class="modal black">
+{{!-- 	<div id="modal4" class="modal black">
 		<div class="modal-content">
 			<h4 class="animated flash infinite center-align red-text text-lighten-3">WARNING!!! <strong><span id="bad-burger-name"></span> Burger!!!</h4>
 			<div class="center-align">
@@ -118,5 +118,8 @@
 				<button id="simplyDevour" class="btn-large red center-align waves-effect waves-light" burgerId="">YUM! EAT IT!</button>
 			</div>
 		</div>
-	</div>
+	</div> --}}
+
+<div class="pushDownFull"></div>
+<h1>Poop</h1>
 </div>
