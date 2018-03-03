@@ -61,3 +61,52 @@ display: none;
 .label-custom {
 	position: static;
 }
+
+.square, .cover {
+	object-fit: cover;
+}
+
+.closet-img-padding {
+	padding: 5px 5px 0px 5px !important;
+}
+
+.margin-top {
+	margin-top: 10px;
+}
+
+.text-five {
+	font-size: 5rem;
+}
+
+.text-two {
+	font-size: 2rem;
+}
+
+.no-top-margin {
+	margin-top: 0px !important;
+}
+
+.no-bottom-margin {
+	margin-bottom: 0px !important;
+}
+
+.no-padding {
+	padding: 0px !important;
+}
+
+.no-margin {
+	margin: 0px !important;
+}
+
+.halfHeight {
+	min-height: 50vh;
+}
+
+.modal-image {
+	width: calc(50%);
+}
+
+.modal-content {
+	top: 0;
+	position: fixed;
+}

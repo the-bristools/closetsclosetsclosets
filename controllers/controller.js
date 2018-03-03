@@ -1,6 +1,5 @@
 var express = require("express");
 var passport = require("passport");
-// var passport = require ("../config/passport.js");
 
 var router = express.Router();
 
