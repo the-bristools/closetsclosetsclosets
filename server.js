@@ -23,11 +23,9 @@ app.use(routes);
 
 
 //passport stuff
-// var passport = require("./config/passport");
-require("./config/passport.js")(passport);
-// require("./controllers/controller.js")(app, passport);
+var passport = require("passport");
+require("./config/passportStrategy")(passport);
 app.use(passport.initialize());
-console.log(passport);
 app.use(passport.session());
 
 
