@@ -22,7 +22,7 @@ robability.belongsTo(user);
 
 router.get("/", function(req, res){
 
-	item.findAll({where:{userId:1},include:[user,category]})
+	item.findAll({where:{userId:4},include:[user,category]})
 	.then(data =>{
 		var hbsObject = {
 			items: data
