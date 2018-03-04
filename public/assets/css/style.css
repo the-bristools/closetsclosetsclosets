@@ -1,3 +1,7 @@
+.avatar-border {
+	border: solid 1px;
+}
+
 .rounded {
 	border-radius: 500px;
 }
@@ -76,7 +80,7 @@ display: none;
 }
 
 .text-five {
-	font-size: 5rem;
+	font-size: 1rem;
 }
 
 .text-two {
@@ -89,6 +93,10 @@ display: none;
 
 .no-bottom-margin {
 	margin-bottom: 0px !important;
+}
+
+.no-left-margin {
+	margin-left: 0px !important;
 }
 
 .no-padding {
@@ -113,7 +121,7 @@ display: none;
 }
 
 .square-div {
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.2);
 	background-clip:content-box;
 	overflow: hidden;
 }
@@ -172,4 +180,12 @@ display: none;
 	-o-transition: filter .5s ease;
 	-ms-transition: filter .5s ease;
 	transition: opacity .5s ease;
+}
+
+.fafafa {
+	background-color: #fafafa;
+}
+
+.logo-img {
+	height: 64px;
 }
