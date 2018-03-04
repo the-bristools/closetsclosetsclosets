@@ -1,0 +1,144 @@
+<nav>
+	<div class="nav-wrapper blue-grey darken-4">
+		<div class="container">
+			<div class="row">
+				<div class="col s12 l10 offset-l1">
+					<a href="#" class="brand-logo">Logo</a>
+					<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+					<ul class="right hide-on-med-and-down">
+						<li><a href="#">Sass</a></li>
+						<li><a href="#">Components</a></li>
+						<li><a href="#">Javascript</a></li>
+						<li><a href="#">Mobile</a></li>
+					</ul>
+					<ul class="side-nav" id="mobile-demo">
+						<li><a href="#">Sass</a></li>
+						<li><a href="#">Components</a></li>
+						<li><a href="#">Javascript</a></li>
+						<li><a href="#">Mobile</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
+	
+	<div class="row no-bottom-margin">
+	<!-- <h1 class="center-align">shinykarissa's Closet</h1> -->
+		<div class="col s12 l10 offset-l1">
+	<!-- 		<div class="card-panel grey lighten-5 z-depth-1"> -->
+				<div class="row margin-top">
+					{{#each user}}
+					<div class="col s4 m3 l2">
+						<div>
+						<img src="{{img_url}}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+						</div>
+					</div>
+					<div class="col s8 m9 l10">
+						<h5 class="blue-grey-text">{{name}}'s Closet:</h5>
+						<span class="blue-grey-text">
+							{{description}}
+						</span>
+					</div>
+					{{/each}}
+				</div>
+			<!-- </div> -->
+		</div>
+	</div>
+		
+	<div class="row no-bottom-margin">
+		<div class="col s12 l10 offset-l1">
+			<div class="col s4">
+				<div class="center">
+					<!-- <i class="material-icons text-five blue-grey-text">flash_on</i> -->
+					<div class="text-five blue-grey-text" id="closet-items"></div>
+					<p class=" no-top-margin text-two blue-grey-text"><strong>Items</strong></p>
+				</div>
+			</div>
+			<div class="col s4">
+				<div class="center">
+					<!-- <i class="material-icons text-five blue-grey-text">flash_on</i> -->
+					<div class="text-five blue-grey-text">27%</div>
+					<p class=" no-top-margin text-two blue-grey-text"><strong>Robability</strong></p>
+				</div>
+			</div>
+			<div class="col s4">
+				<div class="center">
+					<!-- <i class="material-icons text-five blue-grey-text">flash_on</i> -->
+					<div class="text-five blue-grey-text">563</div>
+					<p class=" no-top-margin text-two blue-grey-text"><strong>Ratings</strong></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12 l10 offset-l1">
+			{{#each items}}
+			<a class="modal-trigger" href="#modal{{id}}">
+				<div class="col s4 closet-img-padding square-div close-counter">
+					<img src="{{img_url}}" alt="" class="square animated bounceIn responsive-img">
+				</div>
+			</a>
+			{{/each}}
+		</div>
+	</div>
+
+
+	<div id="modal1" class="modal">
+		<img src="https://scontent-sjc3-1.cdninstagram.com/vp/68e204a80cc1ba64a9e2e93b20343c6f/5B2A0AAF/t51.2885-19/s320x320/27890686_570181423318078_8884215288581586944_n.jpg" alt="" class="modal-image">
+	</div>
+
+	{{#each items}}
+	<div id="modal{{id}}" class="modal">
+			<img src="{{img_url}}" alt="" class="modal-image">
+			<span class="modal-content-mycloset">
+				<h4>{{name}}</h4>
+				<p>{{description}}</p>
+				<p>{{tags}}</p>
+				<p>{{categoryId}}</p>
+			</span>
+	</div>
+	{{/each}}
+
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large waves-effect waves-light">
+			<i class="large material-icons blue-grey darken-4">add</i>
+		</a>
+		<ul>
+			<li><a class="btn-floating green waves-effect waves-light"><i class="material-icons">person_add</i></a></li>
+			<li><a class="btn-floating blue waves-effect waves-dark"><i class="material-icons">playlist_add</i></a></li>
+		</ul>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+$('#closet-items').append($('.close-counter').length);
+
+$(document).ready(function(){
+	$('.modal').modal();
+ 	$('.slider').slider();
+ 	$('select').material_select();
+ 	$(".button-collapse").sideNav();
+
+    var cw = $('.square-div').width();
+	$('.square').css({'height':cw+'px'});
+	$('.square').css({'width':cw+'px'});
+
+});
+
+$(window).resize(function(){
+	console.log('resized');
+	var cw = $('.square-div').width();
+	$('.square').css({'height':cw+'px'});
+	$('.square').css({'width':cw+'px'});
+})
+
+
+// $('.square').css({'height':cw+'px', 'width':cw+'px'});
+// $('.cover').css({'object-fit:cover'});
+</script>
