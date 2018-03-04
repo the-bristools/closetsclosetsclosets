@@ -20,8 +20,23 @@ item.belongsTo(category);
 user.hasMany(robability);
 robability.belongsTo(user);
 
-router.get("/", function(req, res){
+router.get("/mycloset", function(req, res){
+	var userId = req.query.userId;
+	console.log('userId: '+userId);
+	item.findAll({where:{userId:userId},include:[user,category]})
+	.then(data =>{
+		var hbsObject = {
+			items: data,
+			user: {dataValues:""},
+			length: {datavalues:{length:""}}
+		}
+		hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
+		console.log('/mycloset Requested');
+		res.render("mycloset", hbsObject);
+	})
+})
 
+router.get("/", function(req, res){
 	item.findAll({where:{userId:4},include:[user,category]})
 	.then(data =>{
 		var hbsObject = {
@@ -175,6 +190,7 @@ router.get("/error", function(req, res){
 router.get("/facebooktest", function(req, res){
 	res.render("facebooktest");
 })
+
 
 //Redirect the user to Facebook for authentication. When complete, 
 //Facebook will redirect the user back to the application at 
