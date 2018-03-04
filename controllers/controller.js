@@ -23,17 +23,25 @@ robability.belongsTo(user);
 router.get("/mycloset", function(req, res){
 	var userId = req.query.userId;
 	console.log('userId: '+userId);
-	item.findAll({where:{userId:userId},include:[user,category]})
-	.then(data =>{
-		var hbsObject = {
-			items: data,
-			user: {dataValues:""},
-			length: {datavalues:{length:""}}
-		}
-		hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
-		console.log('/mycloset Requested');
-		res.render("mycloset", hbsObject);
+	category.findAll().then(categoryData=>{
+		var categories = categoryData;
+		item.findAll({where:{userId:userId},include:[user,category]})
+		.then(data =>{
+			var hbsObject = {
+				items: data,
+				user: {dataValues:""},
+				categories: categories,
+				lengthiness: {dataValues:{longness:""}}
+			}
+			hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
+			hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
+			console.log('/mycloset Requested');
+			res.render("mycloset", hbsObject);
+			console.log(hbsObject.items.length);
+		})
 	})
+
+	
 })
 
 router.get("/", function(req, res){

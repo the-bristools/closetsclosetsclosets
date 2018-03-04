@@ -53,7 +53,7 @@
 			<div class="col s4">
 				<div class="center">
 					<!-- <i class="material-icons text-five blue-grey-text">flash_on</i> -->
-					<div class="text-five blue-grey-text" id="closet-items"></div>
+					<div class="text-five blue-grey-text" id="closet-items">{{#each lengthiness}}{{longness}}{{/each}}</div>
 					<p class=" no-top-margin text-two blue-grey-text"><strong>Items</strong></p>
 				</div>
 			</div>
@@ -78,8 +78,10 @@
 		<div class="col s12 l10 offset-l1">
 			{{#each items}}
 			<a class="modal-trigger" href="#modal{{id}}">
-				<div class="col s4 closet-img-padding square-div close-counter">
-					<img src="{{img_url}}" alt="" class="square animated bounceIn responsive-img">
+				<div class="col s4 closet-img-padding square-div closet-counter">
+					<img src="{{img_url}}" alt="" class="square animated fadeIn responsive-img">
+					<a class="btn-floating btn-small waves-effect waves-light blue img-update-button" dataId="{{id}}"><i class="material-icons">update</i></a>
+					<a class="btn-floating btn-small waves-effect waves-light blue img-delete-button" dataId="{{id}}"><i class="material-icons">delete_forever</i></a>
 				</div>
 			</a>
 			{{/each}}
@@ -87,12 +89,12 @@
 	</div>
 
 
-	<div id="modal1" class="modal">
+{{!-- 	<div id="modal1" class="modal">
 		<img src="https://scontent-sjc3-1.cdninstagram.com/vp/68e204a80cc1ba64a9e2e93b20343c6f/5B2A0AAF/t51.2885-19/s320x320/27890686_570181423318078_8884215288581586944_n.jpg" alt="" class="modal-image">
-	</div>
+	</div> --}}
 
 	{{#each items}}
-	<div id="modal{{id}}" class="modal">
+	<div id="modal{{id}}" class="modal no-line-height">
 			<img src="{{img_url}}" alt="" class="modal-image">
 			<span class="modal-content-mycloset">
 				<h4>{{name}}</h4>
@@ -109,15 +111,71 @@
 		</a>
 		<ul>
 			<li><a class="btn-floating green waves-effect waves-light"><i class="material-icons">person_add</i></a></li>
-			<li><a class="btn-floating blue waves-effect waves-dark"><i class="material-icons">playlist_add</i></a></li>
+			<li><a href="#modalAdd" class="modal-trigger btn-floating blue waves-effect waves-dark"><i class="material-icons">playlist_add</i></a></li>
 		</ul>
 	</div>
+
+<div id="modalAdd" class="modal">
+	<div class="modal-content">
+		<div class="row">
+		<form class="col s12">
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="userId" type="text">
+					<label for="userId">User Id</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="itemName" type="text">
+					<label for="username">Item Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<select id="categoryId">
+						{{#each categories}}
+							<option value="{{id}}">{{name}}</option>
+						{{/each}}
+					</select>
+					<label>Select A Category!</label>
+				</div>
+				<div class="input-field col s6">
+					<input id="subcategory" type="text">
+					<label for="subcategory">Subcategory (optional)</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea id="description" class="materialize-textarea"></textarea>
+					<label for="description">Description</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="img_url" type="text">
+					<label for="img_url">Image URL</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="tags" type="text">
+					<label for="tags">Tags</label>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn red" id="newItem">Create New Item</button>
+	</div>
+</div>
 
 </div>
 
 <script type="text/javascript">
 
-$('#closet-items').append($('.close-counter').length);
+// $('#closet-items').append($('.closet-counter').length);
 
 $(document).ready(function(){
 	$('.modal').modal();
@@ -128,7 +186,8 @@ $(document).ready(function(){
     var cw = $('.square-div').width();
 	$('.square').css({'height':cw+'px'});
 	$('.square').css({'width':cw+'px'});
-
+	$('.square-div').css({'height':cw+'px'});
+	// $('.square-div').css({'width':cw+'px'});
 });
 
 $(window).resize(function(){
@@ -136,9 +195,43 @@ $(window).resize(function(){
 	var cw = $('.square-div').width();
 	$('.square').css({'height':cw+'px'});
 	$('.square').css({'width':cw+'px'});
+	$('.square-div').css({'height':cw+'px'});
+	// $('.square-div').css({'width':cw+'px'});
 })
 
+$('#modalAddOpen').click(function(){
+	console.log('modal add')
+	$('#modalAdd').modal('open');
+})
 
-// $('.square').css({'height':cw+'px', 'width':cw+'px'});
-// $('.cover').css({'object-fit:cover'});
+$('.square-div').hover(function(){
+	console.log('hovered');
+	$(this).children(".img-delete-button").css("opacity",".7");
+	$(this).children(".img-update-button").css("opacity",".7");
+	$(this).children(".modal-trigger").children(".square").css("webkitFilter","brightness(50%)");
+});
+
+$('.square-div').mouseleave(function(){
+	console.log('hovered');
+	$(this).children(".img-delete-button").css("opacity","0");
+	$(this).children(".img-update-button").css("opacity","0");
+		$(this).children(".modal-trigger").children(".square").css("webkitFilter","brightness(100%)");
+});
+
+$(".img-delete-button").hover(function(){
+	$(this).css("opacity","1");
+})
+
+$(".img-delete-button").mouseleave(function(){
+	$(this).css("opacity",".7");
+})
+
+$(".img-update-button").hover(function(){
+	$(this).css("opacity","1");
+})
+
+$(".img-update-button").mouseleave(function(){
+	$(this).css("opacity",".7");
+})
+
 </script>
