@@ -34,6 +34,7 @@ router.get("/mycloset", function(req, res){
 				lengthiness: {dataValues:{longness:""}}
 			}
 			hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
+			hbsObject.user.dataValues.longness = hbsObject.items.length;
 			hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
 			console.log('/mycloset Requested');
 			res.render("mycloset", hbsObject);
