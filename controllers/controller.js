@@ -79,6 +79,20 @@ router.get("/api/item/search", function(req, res){
     });
 })
 
+router.post("/api/user/new", function(req, res){
+    // Take the request...
+    var newUser = req.body;
+
+    console.log(newUser);
+
+    // Then add the user to the database using sequelize
+    user.create({
+      name: newUser.name,
+      img_url: newUser.url,
+      description: newUser.description
+  });
+})
+
 router.get("/api/user/search", function(req, res){
 	var query = {};
     if (req.query.id) {
