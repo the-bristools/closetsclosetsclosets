@@ -31,6 +31,42 @@
 	    // getBurgerGifs();
     });
 
+    $("#add-user-btn").on("click", function(event) {
+  event.preventDefault();
+
+  // make a newUser obj
+  var newUser = {
+    // name from name input
+    name: $("#name").val().trim(),
+    // description from description input
+    description: $("#description").val().trim(),
+    // url from url input
+    url: $("#url").val().trim()
+
+  };
+
+  // send an AJAX POST-request with jQuery
+  $.post("/api/user/new", newUser)
+    // on success, run this callback
+    .then(function(data) {
+      // log the data we found
+      console.log(data);
+      // tell the user we're adding a new user with an alert window
+      alert("Adding new user...");
+    });
+
+  // empty each input box by replacing the value with an empty string
+  $("#name").val("");
+  $("#description").val("");
+  $("#url").val("");
+
+
+  $('#new-user-modal').modal('close');
+  //need to add something here to prompt the user to log in after creating a new account?
+
+});
+
+
     // function getBurgerGifs(){
     // 	var rand = Math.floor(Math.random()*50);
     // 	var queryURL = 'https://api.giphy.com/v1/gifs/search?q=burger&api_key=dc6zaTOxFJmzC&MPAA=R&limit=100&offset='+rand+''
