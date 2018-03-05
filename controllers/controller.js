@@ -155,22 +155,6 @@ router.get("/update", function(req, res){
 })
 
 router.put("/api/item/update", function(req, res){
-	// var update = {};
-	// if(req.body.img_url){
-	// 	update.img_url = req.body.img_url;
-	// }
-	// if(req.body.description){
-	// 	update.description = req.body.description;
-	// }
-	// if(req.body.categoryId){
-	// 	update.categoryId = req.body.categoryId;
-	// }
-	// if(req.body.subcategory){
-	// 	update.subcategory = req.body.subcategory;
-	// }
-	// if(req.body.tags){
-	// 	update.tags = req.body.tags;
-	// }
 	item.update(req.body,
 	{
 		where: { id: req.body.id }
@@ -192,7 +176,12 @@ router.post("/api/item/new", function(req, res){
 	})
 })
 
-router.post("/api/delete", function(req, res){
+router.post("/api/item/delete", function(req, res){
+	var id = req.body.id
+	item.destroy({where:{id:id}})
+	.then((data)=>{
+		return res.json(data);
+	})
 	// var id = req.body.id;
 	// console.log('id to delete' +id);
 

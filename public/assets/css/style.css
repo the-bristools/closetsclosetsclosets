@@ -128,6 +128,7 @@ display: none;
 
 .no-line-height {
 	line-height: 0px;
+	overflow-y: hidden !important;
 }
 
 .square {
@@ -160,11 +161,11 @@ display: none;
 	-ms-transform: translate(-30%, -50%);
 
 	opacity: 0;
-	-webkit-transition: filter .5s ease;
-	-moz-transition: filter .5s ease;
-	-o-transition: filter .5s ease;
-	-ms-transition: filter .5s ease;
-	transition: opacity .5s ease;
+	-webkit-transition: filter .25s ease;
+	-moz-transition: filter .25s ease;
+	-o-transition: filter .25s ease;
+	-ms-transition: filter .25s ease;
+	transition: opacity .25s ease;
 }
 
 .img-delete-button {
@@ -175,11 +176,11 @@ display: none;
 	-ms-transform: translate(-70%, -50%);
 
 	opacity: 0;
-	-webkit-transition: filter .5s ease;
-	-moz-transition: filter .5s ease;
-	-o-transition: filter .5s ease;
-	-ms-transition: filter .5s ease;
-	transition: opacity .5s ease;
+	-webkit-transition: filter .25s ease;
+	-moz-transition: filter .25s ease;
+	-o-transition: filter .25s ease;
+	-ms-transition: filter .25s ease;
+	transition: opacity .25s ease;
 }
 
 .fafafa {
@@ -188,4 +189,12 @@ display: none;
 
 .logo-img {
 	height: 64px;
+}
+
+.hidden {
+	visibility: hidden;
+	display: none;
+}
+
+.avatar-size {
 }

@@ -34,7 +34,7 @@
 				{{#each user}}
 				<div class="col s4 offset-s1 m3 offset-m2 l2 offset-l2">
 					<div>
-						<img src="{{img_url}}" alt="" class="circle responsive-img avatar-border">
+						<img src="{{img_url}}" alt="" class="circle responsive-img avatar-border avatar-size">
 					</div>
 				</div>
 				<div class="col s6 m5">
@@ -58,15 +58,15 @@
 			</div>
 		</div>
 	</div>
-		
+
 	<div class="row">
 		<div class="col s12 l10 offset-l1">
 			{{#each items}}
 			<a class="modal-trigger" href="#modal{{id}}">
 				<div class="col s4 closet-img-padding square-div closet-counter category{{categoryId}}">
 					<img src="{{img_url}}" alt="" class="square animated fadeIn responsive-img">
-					<a class="btn-floating btn-small waves-effect waves-light blue img-update-button" dataId="{{id}}"><i class="material-icons">update</i></a>
-					<a class="btn-floating btn-small waves-effect waves-light blue img-delete-button" dataId="{{id}}"><i class="material-icons">delete_forever</i></a>
+					<a href="#modalUpdate" class="btn-floating btn-large waves-effect waves-light blue img-update-button modal-trigger" dataId="{{id}}" dataName="{{name}}" dataImgUrl="{{img_url}}" dataCategoryId="{{categoryId}}" dataSubcategory="{{subcategory}}" dataDescription="{{description}}" dataTags="{{tags}}"><i class="material-icons">update</i></a>
+					<a href="#modalDelete" class="btn-floating btn-large waves-effect waves-light blue img-delete-button modal-trigger" dataId="{{id}}" dataName="{{name}}"><i class="material-icons">delete_forever</i></a>
 				</div>
 			</a>
 			{{/each}}
@@ -90,7 +90,6 @@
 			<i class="large material-icons blue-grey darken-4">edit</i>
 		</a>
 		<ul>
-			<li><a class="btn-floating green waves-effect waves-light"><i class="material-icons">person_add</i></a></li>
 			<li><a href="#modalAdd" class="modal-trigger btn-floating green waves-effect waves-dark"><i class="material-icons">add</i></a></li>
 		</ul>
 	</div>
@@ -99,19 +98,25 @@
 	<div class="modal-content">
 		<div class="row">
 			<form class="col s12">
-				<div class="row">
+				<div class="row no-margin hidden">
 					<div class="input-field col s12 no-bottom-margin">
 						<input disabled id="userId" type="text" value="{{#each user}}{{id}}{{/each}}">
 						<label for="userId">User Id</label>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row no-margin">
 					<div class="input-field col s12 no-bottom-margin">
 						<input id="itemName" type="text">
 						<label for="username">Item Name</label>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<input id="img_url" type="text">
+						<label for="img_url">Image URL</label>
+					</div>
+				</div>
+				<div class="row no-margin">
 					<div class="input-field col s6 no-bottom-margin">
 						<select id="categoryId">
 							{{#each categories}}
@@ -125,29 +130,94 @@
 						<label for="subcategory">Subcategory (optional)</label>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row no-margin">
 					<div class="input-field col s12 no-bottom-margin">
 						<textarea id="description" class="materialize-textarea"></textarea>
 						<label for="description">Description</label>
 					</div>
 				</div>
-				<div class="row">
-					<div class="input-field col s12 no-bottom-margin">
-						<input id="img_url" type="text">
-						<label for="img_url">Image URL</label>
-					</div>
-				</div>
-				<div class="row">
+				<div class="row no-margin">
 					<div class="input-field col s12 no-bottom-margin">
 						<input id="tags" type="text">
 						<label for="tags">Tags</label>
 					</div>
 				</div>
+				<div class="row no-margin">
+					<button class="btn red" id="newItem" style="margin-left:11.5px">Create New Item</button>	
+				</div>
+				
 			</form>
 		</div>
 	</div>
-	<div class="modal-footer">
-		<button class="btn red" id="newItem">Create New Item</button>
+</div>
+
+<div id="modalUpdate" class="modal">
+	<div class="modal-content">
+		<div class="row">
+			<form class="col s12">
+				<div class="row no-margin hidden">
+					<div class="input-field col s12 no-bottom-margin">
+						<input disabled id="itemIdUpdate" type="text" value="">
+						<label for="userId">User Id</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<input id="itemNameUpdate" type="text">
+						<label for="username">Item Name</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<input id="imgUrlUpdate" type="text">
+						<label for="img_url">Image URL</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s6 no-bottom-margin">
+						<select id="categoryIdUpdate">
+							{{#each categories}}
+								<option class="category{{id}}" value="{{id}}">{{name}}</option>
+							{{/each}}
+						</select>
+						<label>Select A Category!</label>
+					</div>
+					<div class="input-field col s6 no-bottom-margin">
+						<input id="subcategoryUpdate" type="text">
+						<label for="subcategory">Subcategory (optional)</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<textarea id="descriptionUpdate" class="materialize-textarea"></textarea>
+						<label for="description">Description</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<input id="tagsUpdate" type="text">
+						<label for="tags">Tags</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<button class="btn red" id="update-request" style="margin-left:11.5px">Update Item</button>	
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="modalDelete" class="modal black">
+	<div class="modal-content">
+		<h4 class="animated flash infinite center-align red-text text-lighten-3">WARNING!!!</h4>
+		<div class="center-align">
+			<img src="https://media.giphy.com/media/Zsx8ZwmX3ajny/giphy.gif" class="responsive-img animated pulse infinite">
+			<h4 class="animated shake infinite red-text text-lighten-3">This will permanently DELETE</h4>
+			<h4 class="animated shake infinite red-text text-lighten-3"><span id="itemNameDelete"></span></h4>
+		</div>
+		<div class="row center-align">
+			<button id="delete-request" class="btn-large red center-align waves-effect waves-light" dataId="">DELETE IT!</button>
+		</div>
 	</div>
 </div>
 
@@ -227,6 +297,69 @@ $('#newItem').on('click', function(){
 		data: data
 	}, data).then((response)=>{
 		console.log(response);
+		location.reload();
+	})
+})
+
+$('.img-delete-button').on('click',function(){
+	var id = $(this).attr('dataId');
+	var name = $(this).attr('dataName');
+	$('#itemNameDelete').empty();
+	$('#itemNameDelete').append(name);
+	$('#delete-request').attr('dataId', id);
+});
+
+$('#delete-request').on('click',function(){
+	var id = $(this).attr('dataId');
+	console.log(id);
+	var url = '/api/item/delete';
+	$.ajax(
+		{
+			url:url,
+			type:'POST',
+			data: {id:id}
+		}).then(function(){
+			location.reload();
+		})
+})
+
+$('.img-update-button').on('click',function(){
+	var id = $(this).attr('dataId');
+	var name = $(this).attr('dataName');
+	var imgUrl = $(this).attr('dataImgUrl');
+	var categoryId = $(this).attr('dataCategoryId');
+	var subcategory = $(this).attr('dataSubcategory');
+	var description = $(this).attr('dataDescription');
+	var tags = $(this).attr('dataTags');
+	$('#itemIdUpdate').attr('value', id);
+	$('#itemNameUpdate').attr('value', name);
+	$('#imgUrlUpdate').attr('value', imgUrl);
+	$('#subcategoryUpdate').attr('value', subcategory);
+	$('#descriptionUpdate').empty();
+	$('#descriptionUpdate').append(description);
+	$('#tagsUpdate').attr('value', tags);
+	Materialize.updateTextFields();
+})
+
+$('#update-request').on('click',function(){
+	event.preventDefault();
+	var data = {};
+	data.userId = $('#userId').val().trim();
+	data.id = $('#itemIdUpdate').val().trim();
+	data.name = $('#itemNameUpdate').val().trim();
+	data.categoryId = $('#categoryIdUpdate').val();
+	data.subcategory = $('#subcategoryUpdate').val().trim();
+	data.description = $('#descriptionUpdate').val().trim();
+	data.img_url = $('#imgUrlUpdate').val().trim();
+	data.tags = $('#tagsUpdate').val().trim();
+	console.log(data);
+
+	$.ajax({
+		url:'/api/item/update',
+		type:"PUT",
+		data:data
+	}).then(function(){
+		location.reload();
 	})
 })
 
