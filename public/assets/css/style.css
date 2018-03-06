@@ -141,11 +141,11 @@ display: none;
 
 .square {
 	/*-webkit-filter: brightness(100%);	*/
-	-webkit-transition: filter .5s ease;
+/*	-webkit-transition: filter .5s ease;
 	-moz-transition: filter .5s ease;
 	-o-transition: filter .5s ease;
 	-ms-transition: filter .5s ease;
-	transition: filter .5s ease;    
+	transition: filter .5s ease;    */
 }
 
 /*.square:hover {
@@ -169,11 +169,11 @@ display: none;
 	-ms-transform: translate(-30%, -50%);
 
 	opacity: 0;
-	-webkit-transition: filter .25s ease;
+/*	-webkit-transition: filter .25s ease;
 	-moz-transition: filter .25s ease;
 	-o-transition: filter .25s ease;
 	-ms-transition: filter .25s ease;
-	transition: opacity .25s ease;
+	transition: opacity .25s ease;*/
 }
 
 .img-delete-button {
@@ -184,11 +184,19 @@ display: none;
 	-ms-transform: translate(-70%, -50%);
 
 	opacity: 0;
+/*	-webkit-transition: filter .25s ease;
+	-moz-transition: filter .25s ease;
+	-o-transition: filter .25s ease;
+	-ms-transition: filter .25s ease;
+	transition: opacity .25s ease;*/
+}
+
+.square, .img-update-button, .img-delete-button, .img-name-hover {
 	-webkit-transition: filter .25s ease;
 	-moz-transition: filter .25s ease;
 	-o-transition: filter .25s ease;
 	-ms-transition: filter .25s ease;
-	transition: opacity .25s ease;
+	transition: filter .25s ease;    
 }
 
 .img-name-hover {
@@ -203,11 +211,11 @@ display: none;
 	text-align: center;
 
 	opacity: 0;
-	-webkit-transition: filter .25s ease;
+/*	-webkit-transition: filter .25s ease;
 	-moz-transition: filter .25s ease;
 	-o-transition: filter .25s ease;
 	-ms-transition: filter .25s ease;
-	transition: opacity .25s ease;
+	transition: opacity .25s ease;*/
 }
 
 .unselectable {
