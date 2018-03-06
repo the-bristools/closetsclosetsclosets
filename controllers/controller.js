@@ -27,6 +27,8 @@ router.get("/mycloset", function(req, res){
 		var categories = categoryData;
 		item.findAll({where:{userId:userId},include:[user,category]})
 		.then(data =>{
+			data.sort(function(a, b){return b.dataValues.id - a.dataValues.id});
+			console.log(data);
 			var hbsObject = {
 				items: data,
 				user: {dataValues:""},
@@ -38,7 +40,7 @@ router.get("/mycloset", function(req, res){
 			hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
 			console.log('/mycloset Requested');
 			res.render("mycloset", hbsObject);
-			console.log(hbsObject.items.length);
+			// console.log(hbsObject.items.length);
 		})
 	})
 

@@ -5,13 +5,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s12 l10 offset-l1">
-						<a href="/" class="brand-logo"><img src="assets/img/hanger-logo.png" class="logo-img"></a>
+						<a href="/" class="brand-logo"><img src="assets/img/hanger-logo.png" class="smol-left-margin logo-img"></a>
 						<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons black-text">menu</i></a>
 						<ul class="right hide-on-med-and-down">
 							<li><a href="#" class="black-text">Sass</a></li>
 							<li><a href="#" class="black-text">Components</a></li>
 							<li><a href="#" class="black-text">Javascript</a></li>
-							<li><a href="#" class="black-text">Mobile</a></li>
+							<li><a href="#" class="black-text smol-right-margin">Mobile</a></li>
 						</ul>
 						<ul class="side-nav" id="mobile-demo">
 							<li><a href="#">Sass</a></li>
@@ -30,7 +30,7 @@
 	
 	<div class="row no-bottom-margin">
 		<div class="col s12 l10 offset-l1">
-			<div class="row margin-top">
+			<div class="row margin-top no-bottom-margin">
 				{{#each user}}
 				<div class="col s4 offset-s1 m3 offset-m2 l2 offset-l2">
 					<div>
@@ -67,6 +67,7 @@
 					<img src="{{img_url}}" alt="" class="square animated fadeIn responsive-img">
 					<a href="#modalUpdate" class="btn-floating btn-large waves-effect waves-light blue img-update-button modal-trigger" dataId="{{id}}" dataName="{{name}}" dataImgUrl="{{img_url}}" dataCategoryId="{{categoryId}}" dataSubcategory="{{subcategory}}" dataDescription="{{description}}" dataTags="{{tags}}"><i class="material-icons">update</i></a>
 					<a href="#modalDelete" class="btn-floating btn-large waves-effect waves-light blue img-delete-button modal-trigger" dataId="{{id}}" dataName="{{name}}"><i class="material-icons">delete_forever</i></a>
+					<div class="img-name-hover unselectable" dataModal="{{id}}">{{name}}</div>
 				</div>
 			</a>
 			{{/each}}
@@ -90,6 +91,7 @@
 			<i class="large material-icons blue-grey darken-4">edit</i>
 		</a>
 		<ul>
+			<li><a id="showNames" class="btn-floating green waves-effect waves-dark"><i id="swapLabel" class="material-icons">label_outline</i></a></li>
 			<li><a href="#modalAdd" class="modal-trigger btn-floating green waves-effect waves-dark"><i class="material-icons">add</i></a></li>
 		</ul>
 	</div>
@@ -254,13 +256,41 @@ $('.square-div').hover(function(){
 	$(this).children(".img-delete-button").css("opacity",".7");
 	$(this).children(".img-update-button").css("opacity",".7");
 	$(this).children(".modal-trigger").children(".square").css("webkitFilter","brightness(50%)");
+	$(this).children(".img-name-hover").css("opacity","1");
 });
 
 $('.square-div').mouseleave(function(){
 	console.log('hovered');
 	$(this).children(".img-delete-button").css("opacity","0");
 	$(this).children(".img-update-button").css("opacity","0");
-		$(this).children(".modal-trigger").children(".square").css("webkitFilter","brightness(100%)");
+	$(this).children(".modal-trigger").children(".square").css("webkitFilter","brightness(100%)");
+	if(show === true){
+		$(this).children(".img-name-hover").css("opacity",".7");
+	}
+	else {
+		$(this).children(".img-name-hover").css("opacity","0");
+	}
+
+});
+
+var show = false;
+
+$('#showNames').on('click', function(){
+	console.log('shownames');
+	console.log(show);
+	if (show === false){
+		show = true;
+		console.log(show);
+		$(".img-name-hover").css("opacity",".7");
+		$("#swapLabel").empty();
+		$("#swapLabel").append("label");
+	}
+	else {
+		show = false;
+		$(".img-name-hover").css("opacity","0");
+		$("#swapLabel").empty();
+		$("#swapLabel").append("label_outline");
+	}
 });
 
 $(".img-delete-button").hover(function(){
@@ -308,6 +338,11 @@ $('.img-delete-button').on('click',function(){
 	$('#itemNameDelete').append(name);
 	$('#delete-request').attr('dataId', id);
 });
+
+$('.img-name-hover').on('click',function(){
+	var id = $(this).attr('dataModal');
+	$('#modal'+id).modal('open');
+})
 
 $('#delete-request').on('click',function(){
 	var id = $(this).attr('dataId');
