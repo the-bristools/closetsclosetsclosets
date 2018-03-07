@@ -216,7 +216,7 @@ router.get("/auth/facebook", passport.authenticate('facebook', {scope:['email']}
 // authentication has failed.
 
 router.get('/auth/facebook/callback', 
-	passport.authenticate('facebook', { successRedirect: "/",
+	passport.authenticate('facebook', { successRedirect: "/profile",
 										failureRedirect: '/error' }));
 
 module.exports = router;
