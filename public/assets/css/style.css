@@ -243,3 +243,7 @@ display: none;
 
 .avatar-size {
 }
+
+#sidenav-overlay {
+	height: 0vh;
+}
