@@ -21,6 +21,10 @@ module.exports = function(sequelize, DataTypes) {
 				len: [1, 1000]
 			}
 		},
+		token: {
+			type: DataTypes.STRING,
+			allowNull: true
+		},		
 		auth_method: DataTypes.STRING,
 		auth_id: DataTypes.STRING
 	}

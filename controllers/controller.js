@@ -44,7 +44,6 @@ router.get("/mycloset", function(req, res){
 		})
 	})
 
-	
 })
 
 router.get("/", function(req, res){
