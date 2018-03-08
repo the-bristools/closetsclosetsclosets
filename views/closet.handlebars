@@ -69,6 +69,9 @@
 				</div>
 			</a>
 			{{/each}}
+			{{#unless items}}
+				<h1 class="center">No Items Yet!</h1>
+			{{/unless}}
 		</div>
 	</div>
 
@@ -76,11 +79,11 @@
 	<div id="modal{{id}}" class="modal no-line-height">
 			<img src="{{img_url}}" alt="" class="modal-image">
 			<span class="modal-content-mycloset">
-				<h4>{{name}}</h4>
-				
-				<p>{{description}}</p>
-				<p>{{tags}}</p>
-				<p>{{categoryId}}</p>
+				<h4 class="restore-line-height-h4">{{name}}</h4>
+				{{!-- <hr> --}}
+				<p class="restore-line-height">{{description}}&nbsp;<span class="seperate-tags blue-grey-text">{{tags}}</span></p>
+				{{!-- <p class="restore-line-height">{{tags}}</p> --}}
+				<p class="set-category-text restore-line-height blue-grey-text" dataCategoryId="{{categoryId}}"></p>
 			</span>
 	</div>
 	{{/each}}
@@ -108,6 +111,24 @@ $(document).ready(function(){
 	$('.square').css({'height':cw+'px'});
 	$('.square').css({'width':cw+'px'});
 	$('.square-div').css({'height':cw+'px'});
+
+	$('.seperate-tags').each(function(){
+
+		var tags = $(this).text().trim();
+		// console.log(tags);
+		var tagsArr = tags.split(',');
+		var tagsHash = ' #'+tagsArr.join(' #');
+		$(this).empty();
+		$(this).append(tagsHash);
+	})
+
+	$('.set-category-text').each(function(){
+		var categoryId = $(this).attr('dataCategoryId');
+		var categories = ['','Apparel','Stuff','Other'];
+		var tempString = 'Category: '+categories[parseInt(categoryId)];
+		console.log('Tempstring: '+tempString);
+		$(this).append(tempString);
+	})
 });
 
 $(window).resize(function(){
