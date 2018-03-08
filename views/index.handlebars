@@ -9,7 +9,7 @@
 					<h3>Check out some closets!!</h3>
 					<div class="row">
 						<button data-target="modal2" class="smol-margin btn blue modal-trigger animated infinite pulse">Look at a closet!</button>
-						<button data-target="new-user-modal" class="smol-margin btn red modal-trigger">New User</button>
+						<button data-target="new-user-modal" id="new-user-text" class="smol-margin btn red modal-trigger">New User</button>
 						<button data-target="user-select" class="smol-margin btn red modal-trigger">Select user</button>
 						{{!-- <button id="check-date" class="smol-margin btn red">Date</button> --}}
 					</div>
@@ -55,14 +55,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				{{!-- <div class="row">
 					<div class="input-field center-align no-side-padding">
 						<div class="input-field col s12 center-align no-side-padding smol-top-margin">	
 							<input class="animated slideInUp smol-bottom-margin" type="text" id="url">
 							<label for="name">Profile Pic (URL):</label>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 				<div class="row">
 					<div class="input-field center-align no-side-padding">
 						<div class="input-field col s12 center-align no-side-padding smol-top-margin">	
@@ -118,32 +118,6 @@
 		</div>
 	</div>
 
-{{!-- 	<div id="modal4" class="modal black">
-		<div class="modal-content">
-			<h4 class="animated flash infinite center-align red-text text-lighten-3">WARNING!!! <strong><span id="bad-burger-name"></span> Burger!!!</h4>
-			<div class="center-align">
-				<img src="assets/img/nastypatty.png" class="responsive-img animated pulse infinite">
-				<h4 class="animated shake infinite red-text text-lighten-3">This burger was made <span id="burger-age"></span></h4>
-			</div>
-			<div class="row center-align">
-				<button id="trulyDevour" class="btn-large red center-align waves-effect waves-light" burgerId="">IDGAF! EAT IT!</button>
-			</div>
-		</div>
-	</div>
-
-	<div id="modal5" class="modal green animated tada">
-		<div class="modal-content">
-			<h4 class="center-align white-text">A nice and juicy burger!</h4>
-			<div class="center-align">
-				<img class="" src="assets/img/krabbypatty.jpg" class="responsive-img">
-				<h4 class="white-text">Would you like to eat <strong><span id="good-burger-name"></span> Burger?</strong></h4>
-			</div>
-			<div class="row center-align">
-				<button id="simplyDevour" class="btn-large red center-align waves-effect waves-light" burgerId="">YUM! EAT IT!</button>
-			</div>
-		</div>
-	</div> --}}
-
 <div class="pushDownFull"></div>
 <h1>Poop</h1>
 </div>
@@ -152,11 +126,45 @@
 	$('#select-user-btn').on('click',function(){
 		event.preventDefault();
 		var userId = $('#userId-select').val().trim();
-		console.log('userId: '+userId);
-		console.log(window.location);
-		console.log(window.location.origin);
 		var url = window.location.origin+'/mycloset?userId='+userId;
 		console.log(url);
 		window.location.href = url;
 	})
+
+	$("#add-user-btn").on("click", function(event) {
+	event.preventDefault();
+
+		// make a newUser obj
+		var newUser = {
+		// name from name input
+		name: $("#name").val().trim(),
+		// description from description input
+		description: $("#description").val().trim(),
+		// url from url input
+		// url: $("#url").val().trim()
+
+	};
+
+	// send an AJAX POST-request with jQuery
+	$.post("/api/user/new", newUser)
+	// on success, run this callback
+	.then(function(data) {
+	// log the data we found
+		console.log('userId'+data);
+		var userId = data;
+		var url = window.location.origin+'/mycloset?userId='+userId;
+		console.log(url);
+		window.location.href = url;
+	// tell the user we're adding a new user with an alert window
+		// empty each input box by replacing the value with an empty string
+		// $("#name").val("");
+		// $("#description").val("");
+		// $("#url").val("");
+		// $('#new-user-modal').modal('close');
+		//need to add something here to prompt the user to log in after creating a new account?
+	});
+
+
+
+	});
 </script>

@@ -32,10 +32,9 @@
 		<div class="col s12 l10 offset-l1">
 			<div class="row margin-top no-bottom-margin">
 				{{#each user}}
-				<div class="col s4 offset-s1 m3 offset-m2 l2 offset-l2">
-					<div>
-						<img src="{{img_url}}" alt="" class="circle responsive-img avatar-border avatar-size">
-					</div>
+				<div class="col s4 offset-s1 m3 offset-m2 l2 offset-l2 relativePos avatar-box">
+					<img src="{{img_url}}" alt="" class="circle responsive-img avatar-border avatar-size">
+					<a href="#modalUserUpdate" class="btn-floating btn-large waves-effect waves-light blue user-update-button modal-trigger" dataId="{{id}}" dataName="{{name}}" dataImgUrl="{{img_url}}" dataDescription="{{description}}"><i class="material-icons">update</i></a>
 				</div>
 				<div class="col s6 m5">
 					<div class="row">
@@ -78,10 +77,11 @@
 	<div id="modal{{id}}" class="modal no-line-height">
 			<img src="{{img_url}}" alt="" class="modal-image">
 			<span class="modal-content-mycloset">
-				<h4>{{name}}</h4>
-				<p>{{description}}</p>
-				<p>{{tags}}</p>
-				<p>{{categoryId}}</p>
+				<h4 class="restore-line-height-h4">{{name}}</h4>
+				{{!-- <hr> --}}
+				<p class="restore-line-height">{{description}}&nbsp;<span class="seperate-tags blue-grey-text">{{tags}}</span></p>
+				{{!-- <p class="restore-line-height">{{tags}}</p> --}}
+				<p class="set-category-text restore-line-height blue-grey-text" dataCategoryId="{{categoryId}}"></p>
 			</span>
 	</div>
 	{{/each}}
@@ -147,7 +147,42 @@
 				<div class="row no-margin">
 					<button class="btn red" id="newItem" style="margin-left:11.5px">Create New Item</button>	
 				</div>
-				
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="modalUserUpdate" class="modal">
+	<div class="modal-content">
+		<div class="row">
+			<form class="col s12">
+				<div class="row no-margin hidden">
+					<div class="input-field col s12 no-bottom-margin">
+						<input disabled id="userIdUpdate" type="text" value="{{#each user}}{{id}}{{/each}}">
+						<label for="userIdUpdate">User Id</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<input id="userNameUpdate" type="text" value="{{#each user}}{{name}}{{/each}}">
+						<label for="userNameUpdate">User Name</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<input id="userImgurlUpdate" type="text" value="{{#each user}}{{img_url}}{{/each}}">
+						<label for="userImgurlUpdate">Profile Image URL</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<div class="input-field col s12 no-bottom-margin">
+						<textarea id="userDescriptionUpdate" class="materialize-textarea">{{#each user}}{{description}}{{/each}}</textarea>
+						<label for="userDescriptionUpdate">Description</label>
+					</div>
+				</div>
+				<div class="row no-margin">
+					<button class="btn red" id="user-update-request" style="margin-left:11.5px">Update User Info</button>	
+				</div>
 			</form>
 		</div>
 	</div>
@@ -236,6 +271,24 @@ $(document).ready(function(){
 	$('.square').css({'height':cw+'px'});
 	$('.square').css({'width':cw+'px'});
 	$('.square-div').css({'height':cw+'px'});
+
+	$('.seperate-tags').each(function(){
+
+		var tags = $(this).text().trim();
+		// console.log(tags);
+		var tagsArr = tags.split(',');
+		var tagsHash = ' #'+tagsArr.join(' #');
+		$(this).empty();
+		$(this).append(tagsHash);
+	})
+
+	$('.set-category-text').each(function(){
+		var categoryId = $(this).attr('dataCategoryId');
+		var categories = ['','Apparel','Stuff','Other'];
+		var tempString = 'Category: '+categories[parseInt(categoryId)];
+		console.log('Tempstring: '+tempString);
+		$(this).append(tempString);
+	})
 });
 
 $(window).resize(function(){
@@ -249,6 +302,19 @@ $(window).resize(function(){
 $('#modalAddOpen').click(function(){
 	console.log('modal add')
 	$('#modalAdd').modal('open');
+})
+
+$('.avatar-box').hover(function(){
+	$(this).children(".user-update-button").css("opacity",".7");
+	$(this).children(".user-update-button").css("opacity",".7");
+	$(this).children('img').css("webkitFilter","brightness(50%)");
+})
+
+
+$('.avatar-box').mouseleave(function(){
+	$(this).children(".user-update-button").css("opacity","0");
+	$(this).children(".user-update-button").css("opacity","0");
+	$(this).children('img').css("webkitFilter","brightness(100%)");
 })
 
 $('.square-div').hover(function(){
@@ -292,6 +358,14 @@ $('#showNames').on('click', function(){
 		$("#swapLabel").append("label_outline");
 	}
 });
+
+$(".user-update-button").hover(function(){
+	$(this).css("opacity","1");
+})
+
+$(".user-update-button").mouseleave(function(){
+	$(this).css("opacity",".7");
+})
 
 $(".img-delete-button").hover(function(){
 	$(this).css("opacity","1");
@@ -374,6 +448,22 @@ $('.img-update-button').on('click',function(){
 	$('#descriptionUpdate').append(description);
 	$('#tagsUpdate').attr('value', tags);
 	Materialize.updateTextFields();
+})
+
+$('#user-update-request').on('click',function(){
+	var data = {};
+	data.id = $('#userIdUpdate').val().trim();
+	data.name = $('#userNameUpdate').val().trim();
+	data.img_url = $('#userImgurlUpdate').val().trim();
+	data.description = $('#userDescriptionUpdate').val().trim();
+	console.log(data);
+	$.ajax({
+		url:'/api/user/update',
+		type:'PUT',
+		data:data
+	}).then(function(){
+		location.reload();
+	})
 })
 
 $('#update-request').on('click',function(){

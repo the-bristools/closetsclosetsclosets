@@ -21,8 +21,9 @@ user.hasMany(robability);
 robability.belongsTo(user);
 
 router.get("/mycloset", function(req, res){
+	// console.log('cookie: '+req.cookie);
 	var userId = req.query.userId;
-	console.log('userId: '+userId);
+	// console.log('userId: '+userId);
 	user.findOne({where:{id:userId}}).then(userData=>{
 		var userInfo = {};
 		userInfo.dataValues = userData.dataValues;
@@ -50,7 +51,13 @@ router.get("/mycloset", function(req, res){
 })
 
 router.get("/closet", function(req, res){
-	var userId = req.query.userId;
+
+	// if(req.cookie){
+	// 	var userId = req.cookie.userId;
+	// }
+	// else if (req.query){
+		var userId = req.query.userId;
+	// }
 	console.log('userId: '+userId);
 	user.findOne({where:{id:userId}}).then(userData=>{
 		var userInfo = {};
@@ -71,6 +78,13 @@ router.get("/closet", function(req, res){
 	})
 })
 
+router.get("/cookietest", function(req,res){
+	if(req.cookies){
+		console.log('Cookies: ', req.cookies);
+	}
+	res.render("cookietest");
+})
+
 router.get("/", function(req, res){
 	item.findAll({where:{userId:4},include:[user,category]})
 	.then(data =>{
@@ -80,27 +94,6 @@ router.get("/", function(req, res){
 		console.log('Root Directory Requested');
 		res.render("index", hbsObject);
 	})
-
- //  //   burger.findAll({}).then(data =>{
- //  //     var hbsObject = {
-	// 	// 	burgers: data
-	// 	// };
-	// 	// console.log('Root Directory Request');
-	// 	// res.render("index", hbsObject);
- //  //   })
- //    burger.findAll({where:{devoured: 0}, limit: 50}).then(data =>{
- //    	var burgers = data;
-	//     burger.findAll({where:{devoured: 1}, limit: 50}).then(data =>{
-	//     	var hbsObject = {
-	//     		burgers: burgers,
-	//     		boogers: data
-	//     	}
-	//     	console.log(hbsObject);
-	//     	res.render("index", hbsObject);	
-	//     })
- //    })
-	// console.log('Root Directory Request');
-	// // res.render("index");
 })
 
 router.get("/item", function(req, res){
@@ -132,28 +125,49 @@ router.get("/api/item/search", function(req, res){
 router.post("/api/user/new", function(req, res){
     // Take the request...
     var newUser = req.body;
-
-    console.log(newUser);
-
+    newUser.img_url = "http://via.placeholder.com/450x450"
+    // console.log(newUser);
     // Then add the user to the database using sequelize
     user.create({
-      name: newUser.name,
-      img_url: newUser.url,
-      description: newUser.description
-  });
+		name: newUser.name,
+		img_url: newUser.img_url,
+		description: newUser.description
+	}).then(result => {
+			var userId = result.dataValues.id;
+		// console.log(result);
+			item.create({
+			name: 'Placeholder Item',
+			img_url: 'http://via.placeholder.com/450x450',
+			description: 'Placeholder Description',
+			userId: userId,
+			categoryId: 3,
+			tags: 'placeholder,tag'
+		}).then(result =>{
+			// console.log(result);
+			res.json(userId);
+		});
+	});
+})
+
+router.put("/api/user/update",function(req,res){
+	var id = req.body.id;
+	user.update(req.body, {where:{id:id}})
+	.then(
+		res.json(true)
+	)
 })
 
 router.get("/api/user/search", function(req, res){
 	var query = {};
-    if (req.query.id) {
-    	query.id = req.query.id;
-    }
-    user.findAll({
-    	where: query
-    }).then(function(results) {
-    	console.log(results);
-    	res.json(results);
-    });
+	if (req.query.id) {
+		query.id = req.query.id;
+	}
+	user.findAll({
+		where: query
+	}).then(function(results) {
+		console.log(results);
+		res.json(results);
+	});
 })
 
 router.get("/api/category/search", function(req, res){
@@ -168,17 +182,17 @@ router.get("/api/category/search", function(req, res){
     });
 })
 
-router.get("/update", function(req, res){
-	var query = req.query.id;
-	item.findOne({where:query})
-	.then(function(result){
-		hbsObject = {
-			item:result
-		}
-		console.log(result);
-		res.render("update", hbsObject)
-	})
-})
+// router.get("/update", function(req, res){
+// 	var query = req.query.id;
+// 	item.findOne({where:query})
+// 	.then(function(result){
+// 		hbsObject = {
+// 			item:result
+// 		}
+// 		console.log(result);
+// 		res.render("update", hbsObject)
+// 	})
+// })
 
 router.put("/api/item/update", function(req, res){
 	item.update(req.body,
@@ -208,16 +222,6 @@ router.post("/api/item/delete", function(req, res){
 	.then((data)=>{
 		return res.json(data);
 	})
-	// var id = req.body.id;
-	// console.log('id to delete' +id);
-
-	// burger.destroy({where: {id:id}})
-	// .then((data)=>{
-	// 	return res.json(data);	
-	// }).catch((error)=>{
-	// 	console.log(error);
-	// 	return res.json(error);
-	// })
 })
 
 //test routes for facebook login

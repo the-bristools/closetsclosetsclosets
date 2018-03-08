@@ -1,0 +1,32 @@
+<div class="container">
+<div class="preloader-wrapper big active">
+<div class="spinner-layer spinner-blue">
+<div class="circle-clipper left">
+<div class="circle"></div>
+</div>
+<div class="gap-patch">
+<div class="circle"></div>
+</div>
+<div class="circle-clipper right">
+<div class="circle"></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+	function deleteAllCookies() {
+		var cookies = document.cookie.split(";");
+
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i];
+			var eqPos = cookie.indexOf("=");
+			var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+			document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		}
+	}
+	deleteAllCookies();
+
+    document.cookie = 'userId=5; path=/mycloset';
+    var x = document.cookie;
+    console.log(x);
+</script>

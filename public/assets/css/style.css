@@ -125,7 +125,9 @@ display: none;
 
 .modal-content-mycloset {
 	top: 0;
+	padding: 10px;
 	position: fixed;
+
 }
 
 .square-div {
@@ -167,13 +169,7 @@ display: none;
 	left: 30%;
 	transform: translate(-30%, -50%);
 	-ms-transform: translate(-30%, -50%);
-
 	opacity: 0;
-/*	-webkit-transition: filter .25s ease;
-	-moz-transition: filter .25s ease;
-	-o-transition: filter .25s ease;
-	-ms-transition: filter .25s ease;
-	transition: opacity .25s ease;*/
 }
 
 .img-delete-button {
@@ -182,16 +178,23 @@ display: none;
 	left: 70%;
 	transform: translate(-70%, -50%);
 	-ms-transform: translate(-70%, -50%);
-
 	opacity: 0;
-/*	-webkit-transition: filter .25s ease;
-	-moz-transition: filter .25s ease;
-	-o-transition: filter .25s ease;
-	-ms-transition: filter .25s ease;
-	transition: opacity .25s ease;*/
 }
 
-.square, .img-update-button, .img-delete-button, .img-name-hover {
+.relativePos {
+	position: relative;
+}
+
+.user-update-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+.square, .img-update-button, .img-delete-button, .img-name-hover, .user-update-button, .avatar-size {
 	-webkit-transition: filter .25s ease;
 	-moz-transition: filter .25s ease;
 	-o-transition: filter .25s ease;
@@ -248,4 +251,23 @@ display: none;
 
 #sidenav-overlay {
 	height: 0vh;
+}
+
+/*hr{
+	border-top: 1px solid #8c8b8b;
+	width: 100%;
+}*/
+
+.restore-line-height {
+	line-height: 25px;
+}
+
+.restore-line-height-h4 {
+	line-height: 40px;
+}
+
+@media only screen and (max-width: 993px){
+	.container {
+	    width: 100%;
+	}
 }

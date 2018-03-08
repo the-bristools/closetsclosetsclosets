@@ -14,10 +14,11 @@ module.exports = function(sequelize, DataTypes) {
 				len: [1, 1000]
 			}
 		},
-		// user_id: {
-		// 	type: DataTypes.INTEGER,
-		// 	allowNull: false
-		// },
+		userId: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		categoryId: DataTypes.INTEGER(100),
 		description: DataTypes.STRING(1000),
 		subcategory: DataTypes.STRING(1000),
 		tags: DataTypes.STRING(1000)
