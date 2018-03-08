@@ -33,12 +33,12 @@ module.exports = function(passport) {
 						else {
 							console.log("We need to create a new user because we can't find one.");
 							console.log('Access token is: ' + accessToken);
-
+							console.log(JSON.stringify(profile));
 							user.create({
 								auth_method: 'facebook',
 								auth_id: profile.id,
 								token: accessToken,
-								name: profile.first_name,
+								name: profile.displayName,
 								img_url: 'https://giphy.com/gifs/creepy-beard-zach-galifianakis-V6R9thgW7fimI',
 								description: 'Some default stuff about a really cool person.'
 								}).then(function(err,user) {
