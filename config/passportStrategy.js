@@ -21,11 +21,8 @@ module.exports = function(passport) {
 				//nextTick waits for data to come back before continuing...
 				process.nextTick(function() {
 					user.findOne({ where: {auth_id: profile.id} })
-					.then(function(err,data) {
-						if(err) {
-							// console.log("If we error here it's because we can't connect...");
-							return done(err);
-						}
+					.then(function(data) {
+						console.log('dATA'+data);
 						if(data){
 							console.log("If we're here, it's because we found a user in our database, so we return to the callback done.");
 							return done(null,data);

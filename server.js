@@ -1,34 +1,34 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
+var passport = require("passport");
+var db = require("./models");
+var exphbs = require("express-handlebars");
+var routes = require("./controllers/controller.js");
+require("./config/passportStrategy")(passport);
 
 var app = express();
 var PORT = process.env.PORT || 3000;
-
-var db = require("./models");
-
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended:false }));
 
-app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(passport.initialize());
 
-var exphbs = require("express-handlebars");
+app.use(routes);
 
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-var routes = require("./controllers/controller.js");
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
 
-app.use(routes);
-
-
-//passport stuff
-var passport = require("passport");
-require("./config/passportStrategy")(passport);
-app.use(passport.initialize());
-
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 db.sequelize.sync({force:false}).then(function(){
 	app.listen(PORT, function(){
