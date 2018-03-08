@@ -38,7 +38,7 @@ module.exports = function(passport) {
 								auth_method: 'facebook',
 								auth_id: profile.id,
 								token: accessToken,
-								name: 'Hardcoded',
+								name: profile.first_name,
 								img_url: 'https://giphy.com/gifs/creepy-beard-zach-galifianakis-V6R9thgW7fimI',
 								description: 'Some default stuff about a really cool person.'
 								}).then(function(err,user) {
