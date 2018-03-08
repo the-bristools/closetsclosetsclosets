@@ -31,20 +31,32 @@ router.get("/mycloset", function(req, res){
 		category.findAll().then(categoryData=>{
 			var categories = categoryData;
 			item.findAll({where:{userId:userId},include:[user,category]}).then(data =>{
-				data.sort(function(a, b){return b.dataValues.id - a.dataValues.id});
-				// console.log(data);
-				var hbsObject = {
-					items: data,
-					user: userInfo,
-					categories: categories,
-					lengthiness: {dataValues:{longness:""}}
+				if(data){
+					data.sort(function(a, b){return b.dataValues.id - a.dataValues.id});
+					// console.log(data);
+					var hbsObject = {
+						items: data,
+						user: userInfo,
+						categories: categories,
+						lengthiness: {dataValues:{longness:""}}
+					}
+					// hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
+					hbsObject.user.dataValues.longness = hbsObject.items.length;
+					hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
+					console.log('/mycloset Requested');
+					res.render("mycloset", hbsObject);
+					// console.log(hbsObject.items.length);
 				}
-				hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
-				hbsObject.user.dataValues.longness = hbsObject.items.length;
-				hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
-				console.log('/mycloset Requested');
-				res.render("mycloset", hbsObject);
-				// console.log(hbsObject.items.length);
+				else{
+					var hbsObject = {
+						items: "",
+						user: userInfo,
+						categories: categories,
+						lengthiness: ""
+					}
+					console.log('/mycloset Requested With No Items');
+					res.render("mycloset", hbsObject);
+				}
 			})
 		})
 	})
@@ -52,28 +64,42 @@ router.get("/mycloset", function(req, res){
 
 router.get("/closet", function(req, res){
 
-	// if(req.cookie){
-	// 	var userId = req.cookie.userId;
-	// }
-	// else if (req.query){
-		var userId = req.query.userId;
-	// }
-	console.log('userId: '+userId);
+	var userId = req.query.userId;
+	// console.log('userId: '+userId);
 	user.findOne({where:{id:userId}}).then(userData=>{
 		var userInfo = {};
 		userInfo.dataValues = userData.dataValues;
-		item.findAll({where:{userId:userId},include:[user,category]}).then(data =>{
-			data.sort(function(a, b){return b.dataValues.id - a.dataValues.id});
-			var hbsObject = {
-				items: data,
-				user: userInfo,
-				lengthiness: {dataValues:{longness:""}}
-			}
-			hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
-			hbsObject.user.dataValues.longness = hbsObject.items.length;
-			hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
-			console.log('/closet Requested');
-			res.render("closet", hbsObject);
+		// console.log(userData);
+		category.findAll().then(categoryData=>{
+			var categories = categoryData;
+			item.findAll({where:{userId:userId},include:[user,category]}).then(data =>{
+				if(data){
+					data.sort(function(a, b){return b.dataValues.id - a.dataValues.id});
+					// console.log(data);
+					var hbsObject = {
+						items: data,
+						user: userInfo,
+						categories: categories,
+						lengthiness: {dataValues:{longness:""}}
+					}
+					// hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
+					hbsObject.user.dataValues.longness = hbsObject.items.length;
+					hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
+					console.log('/closet Requested');
+					res.render("closet", hbsObject);
+					// console.log(hbsObject.items.length);
+				}
+				else{
+					var hbsObject = {
+						items: "",
+						user: userInfo,
+						categories: categories,
+						lengthiness: ""
+					}
+					console.log('/closet Requested With No Items');
+					res.render("closet", hbsObject);
+				}
+			})
 		})
 	})
 })
@@ -86,10 +112,11 @@ router.get("/cookietest", function(req,res){
 })
 
 router.get("/", function(req, res){
-	item.findAll({where:{userId:4},include:[user,category]})
+	// console.log(req.cookies);
+	user.findAll()
 	.then(data =>{
 		var hbsObject = {
-			items: data
+			users: data
 		};
 		console.log('Root Directory Requested');
 		res.render("index", hbsObject);
@@ -246,6 +273,6 @@ router.get("/auth/facebook", passport.authenticate('facebook', {scope:['email']}
 
 router.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', { successRedirect: "/",
-										failureRedirect: '/error' }));
+										failureRedirect: '/' }));
 
 module.exports = router;

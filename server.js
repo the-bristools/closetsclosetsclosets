@@ -23,11 +23,13 @@ app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+	done(null, user);
+	console.log('user+'+user.dataValues.token);
+	console.log('done+'+done);
 });
 
 passport.deserializeUser(function(user, done) {
-  done(null, user);
+	done(null, user);
 });
 
 db.sequelize.sync({force:false}).then(function(){
