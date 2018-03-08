@@ -23,27 +23,52 @@ robability.belongsTo(user);
 router.get("/mycloset", function(req, res){
 	var userId = req.query.userId;
 	console.log('userId: '+userId);
-	category.findAll().then(categoryData=>{
-		var categories = categoryData;
-		item.findAll({where:{userId:userId},include:[user,category]})
-		.then(data =>{
+	user.findOne({where:{id:userId}}).then(userData=>{
+		var userInfo = {};
+		userInfo.dataValues = userData.dataValues;
+		// console.log(userData);
+		category.findAll().then(categoryData=>{
+			var categories = categoryData;
+			item.findAll({where:{userId:userId},include:[user,category]}).then(data =>{
+				data.sort(function(a, b){return b.dataValues.id - a.dataValues.id});
+				// console.log(data);
+				var hbsObject = {
+					items: data,
+					user: userInfo,
+					categories: categories,
+					lengthiness: {dataValues:{longness:""}}
+				}
+				hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
+				hbsObject.user.dataValues.longness = hbsObject.items.length;
+				hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
+				console.log('/mycloset Requested');
+				res.render("mycloset", hbsObject);
+				// console.log(hbsObject.items.length);
+			})
+		})
+	})
+})
+
+router.get("/closet", function(req, res){
+	var userId = req.query.userId;
+	console.log('userId: '+userId);
+	user.findOne({where:{id:userId}}).then(userData=>{
+		var userInfo = {};
+		userInfo.dataValues = userData.dataValues;
+		item.findAll({where:{userId:userId},include:[user,category]}).then(data =>{
 			data.sort(function(a, b){return b.dataValues.id - a.dataValues.id});
-			console.log(data);
 			var hbsObject = {
 				items: data,
-				user: {dataValues:""},
-				categories: categories,
+				user: userInfo,
 				lengthiness: {dataValues:{longness:""}}
 			}
 			hbsObject.user.dataValues = hbsObject.items[0].user.dataValues;
 			hbsObject.user.dataValues.longness = hbsObject.items.length;
 			hbsObject.lengthiness.dataValues.longness = hbsObject.items.length;
-			console.log('/mycloset Requested');
-			res.render("mycloset", hbsObject);
-			// console.log(hbsObject.items.length);
+			console.log('/closet Requested');
+			res.render("closet", hbsObject);
 		})
 	})
-
 })
 
 router.get("/", function(req, res){

@@ -200,6 +200,8 @@ display: none;
 }
 
 .img-name-hover {
+	padding-left: 10px;
+	padding-right: 10px;
 	font-size: 2rem;
 	position: absolute;
 	color: white;
