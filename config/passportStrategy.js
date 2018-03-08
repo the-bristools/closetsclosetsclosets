@@ -33,7 +33,7 @@ module.exports = function(passport) {
 						else {
 							console.log("We need to create a new user because we can't find one.");
 							console.log('Access token is: ' + accessToken);
-							console.log(JSON.stringify(profile));
+							// console.log(JSON.stringify(profile));
 							user.create({
 								auth_method: 'facebook',
 								auth_id: profile.id,
