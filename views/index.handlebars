@@ -9,8 +9,8 @@
 					<h3>Check out some closets!!</h3>
 					<div class="row">
 						<button data-target="modal2" class="smol-margin btn blue modal-trigger animated infinite pulse">Look at a closet!</button>
-						<a href="#"><button data-target="new-user-modal" class="smol-margin btn red modal-trigger">Create a login</button></a>
-						<button class="smol-margin btn red modal-trigger">Login (not yet implemented)</button>
+						<button data-target="new-user-modal" class="smol-margin btn red modal-trigger">New User</button>
+						<button data-target="user-select" class="smol-margin btn red modal-trigger">Select user</button>
 						{{!-- <button id="check-date" class="smol-margin btn red">Date</button> --}}
 					</div>
 					<h5 class="light grey-text text-lighten-3">Look at a closet or whatever idc!</h5>
@@ -45,7 +45,7 @@
 
 	<div id="new-user-modal" class="modal modal-custom">
 		<div class="modal-content modal-content-custom">
-			<h4 class="animated slideInUp center-align">Create New Login</h4>
+			<h4 class="animated slideInUp center-align">New User</h4>
 			<form>
 				<div class="row">
 					<div class="input-field center-align no-side-padding">
@@ -58,7 +58,7 @@
 				<div class="row">
 					<div class="input-field center-align no-side-padding">
 						<div class="input-field col s12 center-align no-side-padding smol-top-margin">	
-							<input class="animated slideInUp smol-bottom-margin" type="text" id="url" data-length="30">
+							<input class="animated slideInUp smol-bottom-margin" type="text" id="url">
 							<label for="name">Profile Pic (URL):</label>
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 				<div class="row">
 					<div class="input-field center-align no-side-padding">
 						<div class="input-field col s12 center-align no-side-padding smol-top-margin">	
-							<input class="animated slideInUp smol-bottom-margin" type="text" id="description" data-length="30">
+							<input class="animated slideInUp smol-bottom-margin" type="text" id="description">
 							<label for="name">About You:</label>
 						</div>
 					</div>
@@ -74,6 +74,26 @@
 				<div class="row">
 					<div class="col s0 m3 l4"></div>
 					<button class="col s12 btn-large blue animated slideInUp waves-effect waves-light" id="add-user-btn">Submit</button>
+				</div>
+			</form>		
+		</div>
+	</div>
+
+	<div id="user-select" class="modal modal-custom">
+		<div class="modal-content modal-content-custom">
+			<h4 class="animated slideInUp center-align">Select User</h4>
+			<form>
+				<div class="row">
+					<div class="input-field center-align no-side-padding">
+						<div class="input-field col s12 center-align no-side-padding smol-top-margin">	
+							<input class="animated slideInUp smol-bottom-margin" type="text" id="userId-select" data-length="2">
+							<label for="userId-select">UserId:</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s0 m3 l4"></div>
+					<button class="col s12 btn-large blue animated slideInUp waves-effect waves-light" id="select-user-btn">Select</button>
 				</div>
 			</form>		
 		</div>
@@ -128,3 +148,15 @@
 <h1>Poop</h1>
 </div>
 
+<script type="text/javascript">
+	$('#select-user-btn').on('click',function(){
+		event.preventDefault();
+		var userId = $('#userId-select').val().trim();
+		console.log('userId: '+userId);
+		console.log(window.location);
+		console.log(window.location.origin);
+		var url = window.location.origin+'/mycloset?userId='+userId;
+		console.log(url);
+		window.location.href = url;
+	})
+</script>

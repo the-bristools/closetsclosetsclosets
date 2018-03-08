@@ -1,0 +1,157 @@
+
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper white darken-4">
+			<div class="container">
+				<div class="row">
+					<div class="col s12 l10 offset-l1">
+						<a href="/" class="brand-logo"><img src="assets/img/hanger-logo.png" class="smol-left-margin logo-img"></a>
+{{!-- 						<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons black-text">menu</i></a>
+						<ul class="right hide-on-med-and-down">
+							<li><a href="#" class="black-text">Sass</a></li>
+							<li><a href="#" class="black-text">Components</a></li>
+							<li><a href="#" class="black-text">Javascript</a></li>
+							<li><a href="#" class="black-text smol-right-margin">Mobile</a></li>
+						</ul>
+						<ul class="side-nav" id="mobile-demo">
+							<li><a href="#">Sass</a></li>
+							<li><a href="#">Components</a></li>
+							<li><a href="#">Javascript</a></li>
+							<li><a href="#">Mobile</a></li>
+						</ul> --}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<div class="container">
+	
+	<div class="row no-bottom-margin">
+		<div class="col s12 l10 offset-l1">
+			<div class="row margin-top no-bottom-margin">
+				{{#each user}}
+				<div class="col s4 offset-s1 m3 offset-m2 l2 offset-l2">
+					<div>
+						<img src="{{img_url}}" alt="" class="circle responsive-img avatar-border avatar-size">
+					</div>
+				</div>
+				<div class="col s6 m5">
+					<div class="row">
+						<div class="col s12">
+							<h5 class="black-text"><strong>{{name}}</strong></h5>
+						</div>
+						<div class="col s12">
+							<span class="blue-grey-text">{{description}}</span>
+						</div>
+						<div class="col s12 smol-top-margin">
+							<div class="col s12 no-padding">
+								<span><strong class="black-text">{{longness}}</strong> Items&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span><strong class="black-text">27%</strong> Robability&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<span><strong class="black-text">563</strong> Ratings</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12 l10 offset-l1">
+			{{#each items}}
+			<a class="modal-trigger" href="#modal{{id}}">
+				<div class="col s4 closet-img-padding square-div closet-counter category{{categoryId}}">
+					<img src="{{img_url}}" alt="" class="square animated fadeIn responsive-img">
+					<div class="img-name-hover unselectable" dataModal="{{id}}">{{name}}</div>
+				</div>
+			</a>
+			{{/each}}
+		</div>
+	</div>
+
+	{{#each items}}
+	<div id="modal{{id}}" class="modal no-line-height">
+			<img src="{{img_url}}" alt="" class="modal-image">
+			<span class="modal-content-mycloset">
+				<h4>{{name}}</h4>
+				<p>{{description}}</p>
+				<p>{{tags}}</p>
+				<p>{{categoryId}}</p>
+			</span>
+	</div>
+	{{/each}}
+
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large waves-effect waves-light">
+			<i class="large material-icons blue-grey darken-4">edit</i>
+		</a>
+		<ul>
+			<li><a id="showNames" class="btn-floating green waves-effect waves-dark"><i id="swapLabel" class="material-icons">label_outline</i></a></li>
+			{{!-- <li><a class="mbtn-floating green waves-effect waves-dark"><i class="material-icons">add</i></a></li> --}}
+		</ul>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.modal').modal();
+ 	$('.slider').slider();
+ 	$('select').material_select();
+ 	$(".button-collapse").sideNav();
+
+    var cw = $('.square-div').width();
+	$('.square').css({'height':cw+'px'});
+	$('.square').css({'width':cw+'px'});
+	$('.square-div').css({'height':cw+'px'});
+});
+
+$(window).resize(function(){
+	console.log('resized');
+	var cw = $('.square-div').width();
+	$('.square').css({'height':cw+'px'});
+	$('.square').css({'width':cw+'px'});
+	$('.square-div').css({'height':cw+'px'});
+})
+
+$('.square-div').hover(function(){
+	console.log('hovered');
+	$(this).children(".square").css("webkitFilter","brightness(50%)");
+	$(this).children(".img-name-hover").css("opacity","1");
+});
+
+$('.square-div').mouseleave(function(){
+	console.log('hovered');
+	$(this).children(".square").css("webkitFilter","brightness(100%)");
+	if(show === true){
+		$(this).children(".img-name-hover").css("opacity",".7");
+	}
+	else {
+		$(this).children(".img-name-hover").css("opacity","0");
+	}
+});
+
+var show = false;
+
+$('#showNames').on('click', function(){
+	console.log('shownames');
+	console.log(show);
+	if (show === false){
+		show = true;
+		console.log(show);
+		$(".img-name-hover").css("opacity",".7");
+		$("#swapLabel").empty();
+		$("#swapLabel").append("label");
+	}
+	else {
+		show = false;
+		$(".img-name-hover").css("opacity","0");
+		$("#swapLabel").empty();
+		$("#swapLabel").append("label_outline");
+	}
+});
+
+</script>

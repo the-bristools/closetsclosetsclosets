@@ -34,7 +34,7 @@ INSERT INTO items (name,img_url,userId,description,categoryId,subcategory,tags) 
 ("Shy Cat","https://media.giphy.com/media/yFQ0ywscgobJK/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
 ("Cat Chicks","https://media.giphy.com/media/12PA1eI8FBqEBa/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
 ("Birthday Cat","https://media.giphy.com/media/SRO0ZwmImic0/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
-("Laundry Cat","https://media.giphy.com/media/p4xp4BjHIdane/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten"),
+("Laundry Cat","https://media.giphy.com/media/p4xp4BjHIdane/giphy.gif",4,"This is a thing that I got.",3,"Cat","cute,cat,kitten");
 
 INSERT INTO users (name,img_url,description,auth_method,auth_id) VALUES ("Karissa","","I like bearded dragons and taking selfies.","closets.com",555555);
 
